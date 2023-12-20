@@ -1,0 +1,17 @@
+@keyframes slide-from-right {
+    from { transform: translateX(300px); }
+    to { transform: translateX(0px); }
+}
+
+@keyframes slide-to-left {
+    from { transform: translateX(0px); }
+    to { transform: translateX(-300px); }
+}
+
+::view-transition-old(root) {
+    animation: 2000ms slide-to-left;
+}
+
+::view-transition-new(root) {
+    animation: 2000ms slide-from-right;
+}

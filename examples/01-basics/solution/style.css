@@ -1,0 +1,12 @@
+#block {
+    height: 20em;
+    width: 20em;
+    background-color: aqua;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+::view-transition-group(root) {
+    animation-duration: 5s;
+}
