@@ -64,18 +64,25 @@ remove
 We will need base on direction of routing add view transition name before or in view-transition
 ```js
 //get direction
+const galleryPath = '/05-images/solution/index.html';
+const catsPath = `/05-images/solution/cats/`;
+
 function getNavigationType(fromPath, toPath) {
-    if (fromPath.includes("/cats")) {
+    if (fromPath.includes(catsPath) && toPath.includes(galleryPath)) {
         return 'cat-page-to-gallery';
     }
 
-    return 'gallery-to-cat-page';
+    if (fromPath.includes(galleryPath) && toPath.includes(catsPath)) {
+        return 'gallery-to-cat-page';
+    }
+
+    return 'other';
 }
 ```
 
 before transition
 ```js
-    let targetThumbnail;
+  let targetThumbnail;
 
   if (navigationType === 'gallery-to-cat-page') {
     targetThumbnail = getLink(toPath).querySelector('img');

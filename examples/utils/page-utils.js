@@ -51,8 +51,11 @@ export async function onLinkNavigate(callback) {
 export function getLink(href) {
     const fullLink = new URL(href, location.href).href;
 
-    return [...document.querySelectorAll('a')].find((link) =>
-        link.href === fullLink
+    return [...document.querySelectorAll('a')].find((link) => {
+        console.log(link.href, fullLink)
+        return link.href.replace("/cats/cats/", "/cats/") === fullLink
+    }
+
     );
 }
 

@@ -1,21 +1,23 @@
 import {getPageContent, onLinkNavigate, getLink} from '../../utils/page-utils.js';
 
+const galleryPath = '/05-images/solution/index.html';
+const catsPath = `/05-images/solution/cats/`;
+
 function getNavigationType(fromPath, toPath) {
-    if (fromPath.includes("/cats")) {
+    if (fromPath.includes(catsPath) && toPath.includes(galleryPath)) {
         return 'cat-page-to-gallery';
     }
 
-    if (toPath.includes("/cats")) {
+    if (fromPath.includes(galleryPath) && toPath.includes(catsPath)) {
         return 'gallery-to-cat-page';
     }
 
-    return "other"
+    return 'other';
 }
 
 onLinkNavigate(async ({fromPath, toPath}) => {
-    const content = await getPageContent(toPath);
-
     const navigationType = getNavigationType(fromPath, toPath)
+    const content = await getPageContent(toPath);
 
     let targetThumbnail;
 
@@ -28,7 +30,6 @@ onLinkNavigate(async ({fromPath, toPath}) => {
         document.body.innerHTML = content;
 
         if (navigationType === 'cat-page-to-gallery') {
-            console.log(fromPath, toPath)
             targetThumbnail = getLink(fromPath).querySelector('img');
             targetThumbnail.style.viewTransitionName = 'banner-img';
         }
